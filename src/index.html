@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Screenshot Application</title>
+  <meta charset="utf-8">
+  <!-- Responsive -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <!-- End Responsive -->
+  <link rel=icon href=assets/favicon.ico sizes="32x32" type="image/vnd.microsoft.icon">
+  <link rel="stylesheet" href="./styles/main.css">
+  <link rel="stylesheet" href="./../node_modules/arcgis-js-api/assets/esri/themes/light/main.css">
+  <link rel="stylesheet" href="./../node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+
+<body class="configurable-application--loading">
+
+  <script>
+    // create or use existing global dojoConfig
+    var dojoConfig = this.dojoConfig || {};
+
+    (function() {
+      var config = dojoConfig;
+
+      // set default properties
+      if (!config.hasOwnProperty("async")) {
+        config.async = true;
+      }
+      if (!config.hasOwnProperty("isDebug")) {
+        config.isDebug = true;
+      }
+
+      // add packages for libs that are not siblings to dojo
+      (function() {
+        var packages = config.packages || [];
+
+        function addPkgIfNotPresent(newPackage) {
+          for (var i = 0; i < packages.length; i++) {
+            var pkg = packages[i];
+            if (pkg.name === newPackage.name) {
+              return;
+            }
+          }
+
+          packages.push(newPackage);
+        }
+        addPkgIfNotPresent({
+          name: "app",
+          location: "./../../src/app"
+        });
+
+        addPkgIfNotPresent({
+          name: "config",
+          location: "./../../src/config"
+        });
+
+        addPkgIfNotPresent({
+          name: "ApplicationBase",
+          location: "../@esri/application-base-js"
+        });
+
+        addPkgIfNotPresent({
+          name: "esri",
+          location: "../arcgis-js-api"
+        });
+        addPkgIfNotPresent({
+          name: "maquette",
+          location: "../maquette",
+          main: "dist/maquette.umd"
+        });
+        addPkgIfNotPresent({
+          name: "maquette-css-transitions",
+          location: "../maquette-css-transitions",
+          main: "dist/maquette-css-transitions.umd"
+        });
+        addPkgIfNotPresent({
+          name: "maquette-jsx",
+          location: "../maquette-jsx",
+          main: "dist/maquette-jsx.umd"
+        });
+
+        config.packages = packages;
+      })();
+    })();
+    </script>
+    <script src="../node_modules/dojo/dojo.js"></script>
+    <script>
+      require(["esri/config", "app/init"], function(esriConfig){
+        esriConfig.assetsPath = "../node_modules/arcgis-js-api/assets";
+      });
+    </script>
+
+  <div class="jumbotron" style="padding:2rem 2rem;margin-bottom:0;">
+    <h1 style="text-align: center;">Screenshot Application</h1>
+  </div>
+  <div id="viewContainer" class="configurable-application__view-container esri-widget">
+    <button
+      id="screenshotBtn"
+      class="action-button esri-widget"
+      aria-label="Take a screenshot of the current map view"
+      title="Take a screenshot of the current map view"
+      >
+      Take a screenshot
+    </button>
+  </div>
+</body>
+
+</html>

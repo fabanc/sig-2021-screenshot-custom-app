@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Screenshot Application</title>
+    <meta charset="utf-8">
+    <!-- Responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <!-- End Responsive -->
+    <link rel=icon href=assets/favicon.ico sizes="32x32" type="image/vnd.microsoft.icon">
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./esri/assets/esri/themes/light/main.css">
+    <link rel="stylesheet" href="./bootstrap/dist/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div id="viewDiv"></div>
+
+    <!-- Can use Dojo loader directly -->
+    <script src="dojo/dojo.js"></script>
+    <script>
+      require(["esri/config", "app/init"], function(esriConfig){
+        esriConfig.assetsPath = "esri/assets";
+      });
+    </script>
+
+  <div class="jumbotron" style="padding:2rem 2rem;margin-bottom:0;">
+    <h1 style="text-align: center;">Screenshot Application</h1>
+  </div>
+  <div id="viewContainer" class="configurable-application__view-container esri-widget">
+    <button
+      id="screenshotBtn"
+      class="action-button esri-widget"
+      aria-label="Take a screenshot of the current map view"
+      title="Take a screenshot of the current map view"
+      >
+      Take a screenshot
+    </button>
+  </div>
+  </body>
+</html>

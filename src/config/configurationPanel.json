@@ -1,0 +1,11 @@
+{
+	"configurationSettings": [{
+		"category": "General",
+		"fields": [{
+			"type": "webmap"
+		}]
+	}],
+	"values": {
+		"placeholder": true
+	}
+}
